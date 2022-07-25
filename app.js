@@ -8,13 +8,13 @@ import authSessionRouter from './routes/authSession.js';
 
 dotenv.config();
 
-const PORT = process.env.PORT
+const PORT = process.env.PORT || 4000;
 const app = express()
 
 app.use(cookieParser())
 app.use(express.json())
 app.use(express.text())
-//si no se agrega la rua el middleware funcionará en todas las rutas lo queramos o no
+//!si no se agrega la ruta el middleware funcionará en todas las rutas lo queramos o no
 app.use('/account',accountRouter)
 app.use('/auth',authRouter)
 

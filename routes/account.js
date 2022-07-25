@@ -6,18 +6,19 @@ const accountRouter = Router();
 
 accountRouter.use((req, res, next) => {
   console.log(req.ip)
-  //next es una función callback que se ejecuta cuando termina la ejecución de el middleware y deja que el flujo del programa siga
+  //?next es una función callback que se ejecuta cuando termina la ejecución de el middleware y deja que el flujo del programa siga
   next()
 })
 
-//Obtener los detalles de una cuenta a partir del guid
+//*Obtener los detalles de una cuenta a partir del guid
 accountRouter.get('/:_id', (req, res) => {
   const {_id} = req.params
   const user = USERS_BBDD.find(user => user._id === _id)
   if(!user) return res.status(404).send('No existe el usuario')
   res.send(user)
 })
-//Crear una nueva cuenta
+
+//*Crear una nueva cuenta
 accountRouter.post('/', (req, res) => {
   const {name, _id} = req.body
   if(!name || !_id) return res.status(400).send('No se ha especificado el nombre')
@@ -26,7 +27,8 @@ accountRouter.post('/', (req, res) => {
   USERS_BBDD.push({name, _id})
   res.send('El usuario ha sido creado')
 })
-//Actualizar el nombre una cuenta
+
+//*Actualizar el nombre una cuenta
 accountRouter.patch('/:_id', (req, res) => {
   const {_id} = req.params
   const {name} = req.body
@@ -36,7 +38,8 @@ accountRouter.patch('/:_id', (req, res) => {
   user.name = name
   res.send()
 })
-//Eliminar una cuenta
+
+//*Eliminar una cuenta
 accountRouter.delete('/:_id', (req, res) => {
   const {_id} = req.params
   const userIndex = USERS_BBDD.findIndex(user => user._id === _id)
